@@ -5,11 +5,11 @@ import "reset-css";
 import "normalize.css";
 import "./index.sass";
 
-import Header from 'components/header/Header';
-import Intro from 'components/Intro/Intro';
+import Header from 'components/Header';
+import Intro from 'components/Intro';
 import About from 'components/About';
-import Service from 'components/Service/Service'
-import JoinUs from 'components/JoinUs/JoinUs'
+import Service from 'components/Service'
+import JoinUs from 'components/JoinUs'
 class App extends Component {
     constructor(props) {
         super(props);

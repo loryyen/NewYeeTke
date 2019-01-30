@@ -23,16 +23,16 @@ class Header extends Component {
                         <div className="navbox">
                             <ul>
                                 <li>
-                                    <NavLink to="/" className="item" onClick={() => this.props.onHederNavClick("intro")}>Home</NavLink>
+                                    <Link  to="/" className="item" onClick={() => this.props.onHederNavClick("intro")}>Home</Link >
                                 </li>
                                 <li>
-                                    <NavLink to="/service" className="item" onClick={() => this.props.onHederNavClick("service")}>Service</NavLink>
+                                    <Link  to="/service" className="item" onClick={() => this.props.onHederNavClick("service")}>Service</Link >
                                 </li>
                                 <li>
-                                    <NavLink to="/about" className="item" onClick={() => this.props.onHederNavClick("about")}>About</NavLink>
+                                    <Link  to="/about" className="item" onClick={() => this.props.onHederNavClick("about")}>About</Link >
                                 </li>
                                 <li>
-                                    <NavLink to="/join-us" className="item" onClick={() => this.props.onHederNavClick("joinus")}>Join Us</NavLink>
+                                    <Link  to="/join-us" className="item" onClick={() => this.props.onHederNavClick("joinus")}>Join Us</Link >
                                 </li>
                             </ul>
                         </div>
