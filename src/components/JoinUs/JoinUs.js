@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 
 class JoinUs extends Component {
+    ref = React.createRef();
     render() {
         return (
-            <div>
+            <div ref={this.ref}>
                 JoinUs
             </div>
         );
