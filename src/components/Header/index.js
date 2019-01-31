@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link, NavLink } from "react-router-dom";
 import "./style.sass";
+import Login from 'components/Login';
 class Header extends Component {
 
 
@@ -34,12 +35,16 @@ class Header extends Component {
                                 <li>
                                     <Link  to="/join-us" className="item" onClick={() => this.props.onHederNavClick("joinus")}>Join Us</Link >
                                 </li>
+                                <li>
+                                    <Link to="/login" className="item">LogIn</Link>                                    
+                                </li>
                             </ul>
                         </div>
                         <Route exact path="/" />
                         <Route path="/service" />
                         <Route path="/about" />
                         <Route path="/join-us" />
+                        <Route exact path="/login" component={Login}></Route>
                         {/* <Route exact path="/" component={Intro} />
                     <Route path="/service" component={Service} />
                     <Route path="/about" component={Philosophy} />

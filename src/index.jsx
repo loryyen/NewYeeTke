@@ -8,8 +8,12 @@ import "./index.sass";
 import Header from 'components/Header';
 import Intro from 'components/Intro';
 import About from 'components/About';
-import Service from 'components/Service'
-import JoinUs from 'components/JoinUs'
+import Service from 'components/Service';
+import JoinUs from 'components/JoinUs';
+import Login from 'components/Login';
+import ReactDom from 'react-dom'
+import { createStore } from "redux";
+import { Provider } from 'react-redux'
 class App extends Component {
     constructor(props) {
         super(props);
