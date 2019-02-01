@@ -1,16 +1,15 @@
-import { filter } from './actions'
+import { ADD_USER, filter } from './actions'
 
 const initalState = {
-    FILTER_TYPE: filter.ADD_USER,
     username: ""
 };
 
 export default function (state = initalState, action) {
     switch (action.type) {
-        case 'add':
+        case ADD_USER:
             return {
                 ...state,
-                username: action.name
+                username: action.username
             };
 
         default:

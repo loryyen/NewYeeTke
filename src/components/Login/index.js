@@ -7,7 +7,9 @@ import {
     withRouter
 } from "react-router-dom";
 import "./style.sass";
-
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux';
+import { add } from 'actions';
 
 const fakeLogin = {
     isAuth: false,
@@ -22,8 +24,6 @@ const fakeLogin = {
 };
 
 class Login extends Component {
-
-
     constructor(props) {
         super(props);
         this.state = {
@@ -51,11 +51,14 @@ class Login extends Component {
                 redirect: true
             })
         });
+        this.props.actions.add(this.state.account)
+        // this.props.dispatch(add(this.state.account));
     }
 
     // componentDidUpdate(prevProps, prevState, snapshot){
     //     console.log(prevState.redirect+" now:"+this.state.redirect);
     // }
+
 
     render() {
         let { from } = this.props.location.state || { from: { pathname: "/" } };
@@ -74,7 +77,7 @@ class Login extends Component {
                     <label htmlFor="password">Password</label>
                     <input type="text" id="password" value={this.state.password} onChange={this.onPasswordChange} />
                     <button onClick={this.onLoginClick}>Login</button>
-
+                    {this.props.loginAccount}
                 </div>
 
             </div>
@@ -83,6 +86,18 @@ class Login extends Component {
     }
 }
 
+const mapStateToProps = (state, ownProps) => {
+    return {
+        loginAccount: state.username
+    };
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        actions: bindActionCreators({ add }, dispatch)
+    }
+}
 
 
-export default Login;
+export default connect(mapStateToProps, mapDispatchToProps, null)(Login);
+// export default connect()(Login);

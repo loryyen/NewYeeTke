@@ -11,9 +11,17 @@ import About from 'components/About';
 import Service from 'components/Service';
 import JoinUs from 'components/JoinUs';
 import Login from 'components/Login';
-import ReactDom from 'react-dom'
+import ReactDom from 'react-dom';
 import { createStore } from "redux";
-import { Provider } from 'react-redux'
+import { Provider } from 'react-redux';
+import Reducer from './reducer';
+import watcher from './watcher';
+
+const store = createStore(Reducer, window.devToolsExtension && window.devToolsExtension());
+
+// console.log(store.getState())
+
+
 class App extends Component {
     constructor(props) {
         super(props);
@@ -77,4 +85,8 @@ class App extends Component {
     }
 }
 
-ReactDOM.render(<App />, document.getElementById("app"));
+ReactDOM.render(
+    <Provider store={store}>
+        <App />
+    </Provider>
+    , document.getElementById("app"));
