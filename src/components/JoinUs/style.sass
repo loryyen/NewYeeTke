@@ -1,0 +1,49 @@
+.joinus
+    min-height: 100vh
+    color: #000000
+    padding: 50px 0
+    .title     
+        letter-spacing: 6.4px
+        font-size: 35px
+        margin: 0 auto
+        text-align: center
+    .eng-title
+        font-size: 16px
+        color: #0d6fb8
+        text-align: center
+        margin-top: 16px
+        margin-bottom: 50px
+
+    @for $i from 1 through 3
+        .job#{$i}
+            border-radius: 5px
+            @if $i==1
+                color: #1f7ee9
+                border: 1px solid #1f7ee9
+            @if $i==2
+                color: #0fb94f
+                border: 1px solid #0fb94f
+            @if $i==3
+                color: #ffad2d
+                border: 1px solid #ffad2d
+            .job-title
+                text-align: center
+            .img
+                background: url("./images/ico_joinus-content#{$i}.jpg") no-repeat
+                display: block
+                background-position: 50%
+                background-size: contain
+                height: 108px
+                margin: 30px 0
+            .content
+                margin: 5px
+                text-align: center
+            ul
+                list-style: none
+                li
+                    width: 80%
+                    margin: 10px auto
+                    border-radius: 5px
+                    border-width: 1px
+                    border-style: solid
+                    padding: 5px

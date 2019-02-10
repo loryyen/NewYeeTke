@@ -1,5 +1,35 @@
 .service
-    min-height: 690px
+    min-height: 100vh
     background: url("./images/img_service-bg.jpg") no-repeat
     background-size: cover
     background-position: center
+    color: #565656
+    padding-bottom: 50px
+    .row-top
+        padding: 117px 0
+        .title     
+            letter-spacing: 6.4px
+            font-size: 35px
+            margin: 0 auto
+            text-align: center
+        .eng-title
+            font-size: 16px
+            color: #b6c7d5
+            text-align: center
+            margin-top: 16px
+            margin-bottom: 50px
+        .desc
+            text-align: center
+            color: #8c8b8b
+            line-height: 30px
+            letter-spacing: .8px
+            font-size: 16px
+    .row-bottom
+        @for $i from 1 through 4 
+            .service#{$i}               
+                .img     
+                    background: url("./images/ico_service-content#{$i}.jpg") no-repeat             
+                    display: block
+                    height: 240px
+                    background-size: contain
+            

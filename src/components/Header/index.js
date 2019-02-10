@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link, NavLink } from "react-router-dom";
 import "./style.sass";
 import Login from 'components/Login';
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux';
+import { add } from 'actions';
 class Header extends Component {
-
-
     constructor(props) {
         super(props);
     }
@@ -35,8 +36,8 @@ class Header extends Component {
                                 <li>
                                     <Link  to="/join-us" className="item" onClick={() => this.props.onHederNavClick("joinus")}>Join Us</Link >
                                 </li>
-                                <li>
-                                    <Link to="/login" className="item">LogIn</Link>                                    
+                                <li>                                    
+                                    <OldSchoolMenuLink label="login" to="/login" loginInAccount={this.props.loginAccount}></OldSchoolMenuLink>
                                 </li>
                             </ul>
                         </div>
@@ -44,11 +45,7 @@ class Header extends Component {
                         <Route path="/service" />
                         <Route path="/about" />
                         <Route path="/join-us" />
-                        <Route exact path="/login" component={Login}></Route>
-                        {/* <Route exact path="/" component={Intro} />
-                    <Route path="/service" component={Service} />
-                    <Route path="/about" component={Philosophy} />
-                    <Route path="/join-us" component={JoinUs} /> */}
+                        <Route exact path="/login" component={Login}></Route>                       
                     </div>
                 </div>
             </Router>
@@ -56,4 +53,30 @@ class Header extends Component {
     }
 }
 
-export default Header;
+
+
+function OldSchoolMenuLink({ label, to, activeOnlyWhenExact,loginInAccount }) {
+    return (
+      <Route
+        path={to}
+        exact={activeOnlyWhenExact}
+        children={({ match }) => (              
+            <Link className="item" to={to}> {loginInAccount!==""?"Logout":"Login"}</Link>        
+        )}
+      />
+    );
+  }
+
+const mapStateToProps = (state, ownProps) => {
+    return {
+        loginAccount: state.username
+    };
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        actions: bindActionCreators({ add }, dispatch)
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Header);
