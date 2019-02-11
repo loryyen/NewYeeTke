@@ -2,19 +2,36 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link, NavLink } from "react-router-dom";
 import "./style.sass";
 import Login from 'components/Login';
+import Modal from 'components/Modal';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
 import { add } from 'actions';
+
+// const ModalContent = ({ account }) => {
+//     return (
+//         <button>{123}</button>
+//     )
+// }
+
 class Header extends Component {
-    constructor(props) {
-        super(props);
-    }
+
+    state = {
+        isModalOpen: false
+    };
 
     onClick = () => {
         //Need to scroll to right place
         //but cant access Upper component DOM from this child component
         //===>lefting state up
     }
+
+    // openModal = () => {
+    //     this.setState({ isModalOpen: true });
+    // }
+
+    // onModalClose = () => {
+    //     this.setState({ isModalOpen: false });
+    // }
 
     render() {
         return (
@@ -25,19 +42,19 @@ class Header extends Component {
                         <div className="navbox">
                             <ul>
                                 <li>
-                                    <Link  to="/" className="item" onClick={() => this.props.onHederNavClick("intro")}>Home</Link >
+                                    <Link to="/" className="item" onClick={() => this.props.onHederNavClick("intro")}>Home</Link >
                                 </li>
                                 <li>
-                                    <Link  to="/service" className="item" onClick={() => this.props.onHederNavClick("service")}>Service</Link >
+                                    <Link to="/service" className="item" onClick={() => this.props.onHederNavClick("service")}>Service</Link >
                                 </li>
                                 <li>
-                                    <Link  to="/about" className="item" onClick={() => this.props.onHederNavClick("about")}>About</Link >
+                                    <Link to="/about" className="item" onClick={() => this.props.onHederNavClick("about")}>About</Link >
                                 </li>
                                 <li>
-                                    <Link  to="/join-us" className="item" onClick={() => this.props.onHederNavClick("joinus")}>Join Us</Link >
+                                    <Link to="/join-us" className="item" onClick={() => this.props.onHederNavClick("joinus")}>Join Us</Link >
                                 </li>
-                                <li>                                    
-                                    <OldSchoolMenuLink label="login" to="/login" loginInAccount={this.props.loginAccount}></OldSchoolMenuLink>
+                                <li>
+                                    <a onClick={this.props.openModal}>Login</a>
                                 </li>
                             </ul>
                         </div>
@@ -45,7 +62,9 @@ class Header extends Component {
                         <Route path="/service" />
                         <Route path="/about" />
                         <Route path="/join-us" />
-                        <Route exact path="/login" component={Login}></Route>                       
+                        {/* <Modal isHidden={!this.state.isModalOpen} onClose={this.onModalClose}>
+                            <ModalContent account={this.props.loginAccount} />
+                        </Modal> */}
                     </div>
                 </div>
             </Router>
@@ -53,19 +72,17 @@ class Header extends Component {
     }
 }
 
-
-
-function OldSchoolMenuLink({ label, to, activeOnlyWhenExact,loginInAccount }) {
-    return (
-      <Route
-        path={to}
-        exact={activeOnlyWhenExact}
-        children={({ match }) => (              
-            <Link className="item" to={to}> {loginInAccount!==""?"Logout":"Login"}</Link>        
-        )}
-      />
-    );
-  }
+// function oldSchoolLink({ label, to, activeOnlyWhenExact, loginInAccount }) {
+//     return (
+//         <Route
+//             path={to}
+//             exact={activeOnlyWhenExact}
+//             children={({ match }) => (
+//                 <Link className="item" to={to}> {loginInAccount !== "" ? "Logout" : "Login"}</Link>
+//             )}
+//         />
+//     );
+// }
 
 const mapStateToProps = (state, ownProps) => {
     return {
@@ -79,4 +96,4 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(Header);
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

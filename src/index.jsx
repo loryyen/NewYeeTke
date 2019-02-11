@@ -10,6 +10,8 @@ import Intro from "components/Intro";
 import About from "components/About";
 import Service from "components/Service";
 import JoinUs from "components/JoinUs";
+import Modal from "components/Modal";
+import Login from "components/Login";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 import Reducer from "./reducer";
@@ -19,6 +21,12 @@ const store = createStore(
   window.devToolsExtension && window.devToolsExtension()
 );
 
+const ModalContent = ({ account }) => {
+  return (
+    <div>{123}</div>
+  )
+}
+
 // console.log(store.getState())
 class App extends Component {
   constructor(props) {
@@ -27,6 +35,17 @@ class App extends Component {
     this.aboutRef = React.createRef();
     this.serviceRef = React.createRef();
     this.joinusRef = React.createRef();
+  }
+  state = {
+    isModalOpen: false
+  };
+
+  openModal = () => {
+    this.setState({ isModalOpen: true });
+  }
+
+  onModalClose = () => {
+    this.setState({ isModalOpen: false });
   }
 
   onHederNavClick = navType => {
@@ -62,11 +81,14 @@ class App extends Component {
   render() {
     return (
       <>
-        <Header onHederNavClick={this.onHederNavClick} />
+        <Header onHederNavClick={this.onHederNavClick} openModal={this.openModal} />
         <Intro ref={this.introRef} />
         <About ref={this.aboutRef} />
         <Service ref={this.serviceRef} />
         <JoinUs ref={this.joinusRef} />
+        <Modal isHidden={!this.state.isModalOpen} onClose={this.onModalClose}>
+          <ModalContent account={this.props.loginAccount} />
+        </Modal>
         {/* <div>Intro</div>
                 <div>Service</div>
                 <div>Philosophy</div>
