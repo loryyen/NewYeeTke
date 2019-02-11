@@ -23,7 +23,7 @@ const store = createStore(
 
 const ModalContent = ({ account }) => {
   return (
-    <div>{123}</div>
+    <div>{"Welcome"}</div>
   )
 }
 
