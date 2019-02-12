@@ -15,6 +15,7 @@ import LoginDialog from "components/LoginDialog";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 import Reducer from "./reducer";
+import Context from "./context/context";
 
 const store = createStore(
   Reducer,
@@ -22,10 +23,8 @@ const store = createStore(
 );
 
 const ModalContent = ({ account }) => {
-  return (
-    <div>{"Welcome"}</div>
-  )
-}
+  return <div>{"Welcome"}</div>;
+};
 
 // console.log(store.getState())
 class App extends Component {
@@ -37,16 +36,17 @@ class App extends Component {
     this.joinusRef = React.createRef();
   }
   state = {
-    isModalOpen: false
+    isModalOpen: false,
+    loginAccount: ""
   };
 
   openModal = () => {
     this.setState({ isModalOpen: true });
-  }
+  };
 
   onModalClose = () => {
     this.setState({ isModalOpen: false });
-  }
+  };
 
   onHederNavClick = navType => {
     //alert(navType);
@@ -80,17 +80,24 @@ class App extends Component {
 
   render() {
     return (
-      <>
-        <Header onHederNavClick={this.onHederNavClick} openModal={this.openModal} />
-        <Intro ref={this.introRef} />
-        <About ref={this.aboutRef} />
-        <Service ref={this.serviceRef} />
-        <JoinUs ref={this.joinusRef} />
-        <Modal isHidden={!this.state.isModalOpen} onClose={this.onModalClose}>
-          {/* <ModalContent account={this.props.loginAccount} /> */}
-          <LoginDialog key={this.state.isModalOpen} onClose={this.onModalClose}></LoginDialog>
-        </Modal>
-        {/* <div>Intro</div>
+      <Context.Provider value={state.loginAccount}>
+        <>
+          <Header
+            onHederNavClick={this.onHederNavClick}
+            openModal={this.openModal}
+          />
+          <Intro ref={this.introRef} />
+          <About ref={this.aboutRef} />
+          <Service ref={this.serviceRef} />
+          <JoinUs ref={this.joinusRef} />
+          <Modal isHidden={!this.state.isModalOpen} onClose={this.onModalClose}>
+            {/* <ModalContent account={this.props.loginAccount} /> */}
+            <LoginDialog
+              key={this.state.isModalOpen}
+              onClose={this.onModalClose}
+            />
+          </Modal>
+          {/* <div>Intro</div>
                 <div>Service</div>
                 <div>Philosophy</div>
                 <div>Business</div>
@@ -100,7 +107,8 @@ class App extends Component {
                 <div>Partner</div>
                 <div>Disclaimer</div>
                 <div>Footer</div> */}
-      </>
+        </>
+      </Context.Provider>
     );
   }
 }
