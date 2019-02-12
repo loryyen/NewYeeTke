@@ -6,47 +6,48 @@ import "./style.sass";
 const modalRoot = document.getElementById("modal");
 
 class Modal extends Component {
-  constructor(props) {
-    super(props);
-    // this.el = document.createElement("div");
-    this.state = {};
-  }
-
-  static getDerivedStateFromProps(props, state) {
-    if (props.isHidden !== state.prevIsHidden) {
-      return {
-        isHidden: props.isHidden,
-        prevIsHidden: props.isHidden
-      };
+    constructor(props) {
+        super(props);
+        // this.el = document.createElement("div");
+        this.state = {};
     }
-    return null;
-  }
 
-  //   componentDidMount() {
-  //     modalRoot.appendChild(this.el);
-  //   }
+    static getDerivedStateFromProps(props, state) {
+        if (props.isHidden !== state.prevIsHidden) {
+            return {
+                isHidden: props.isHidden,
+                prevIsHidden: props.isHidden
+            };
+        }
+        return null;
+    }
 
-  //   componentWillUnmount() {
-  //     modalRoot.removeChild(this.el);
-  //   }
+    //   componentDidMount() {
+    //     modalRoot.appendChild(this.el);
+    //   }
 
-  onButtonClick = () => {
-    this.setState({
-      hidden: !this.state.isHidden
-    });
-    this.props.onClose();
-  };
+    //   componentWillUnmount() {
+    //     modalRoot.removeChild(this.el);
+    //   }
 
-  render() {
-    return ReactDOM.createPortal(
-      <div className={cx("modal", { hidden: this.state.isHidden })}>
-        <button onClick={this.props.onClose}>X</button>
-        {this.props.children}
-      </div>,
-      //this.el
-      document.getElementById("modal")
-    );
-  }
+    onButtonClick = () => {
+        this.setState({
+            hidden: !this.state.isHidden
+        });
+        this.props.onClose();
+    };
+
+    render() {
+        return ReactDOM.createPortal(
+            <div className={cx("modal", { hidden: this.state.isHidden })}>
+                <div className="modalbox">
+                    <button className="closeButton" onClick={this.props.onClose}>X</button>
+                    {this.props.children}
+                </div>
+            </div>,
+            document.getElementById("modal")
+        );
+    }
 }
 
 export default Modal;

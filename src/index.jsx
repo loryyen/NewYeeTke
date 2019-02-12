@@ -11,7 +11,7 @@ import About from "components/About";
 import Service from "components/Service";
 import JoinUs from "components/JoinUs";
 import Modal from "components/Modal";
-import Login from "components/Login";
+import LoginDialog from "components/LoginDialog";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 import Reducer from "./reducer";
@@ -87,7 +87,8 @@ class App extends Component {
         <Service ref={this.serviceRef} />
         <JoinUs ref={this.joinusRef} />
         <Modal isHidden={!this.state.isModalOpen} onClose={this.onModalClose}>
-          <ModalContent account={this.props.loginAccount} />
+          {/* <ModalContent account={this.props.loginAccount} /> */}
+          <LoginDialog onClose={this.onModalClose}></LoginDialog>
         </Modal>
         {/* <div>Intro</div>
                 <div>Service</div>

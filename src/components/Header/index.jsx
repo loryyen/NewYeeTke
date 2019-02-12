@@ -7,32 +7,12 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
 import { add } from 'actions';
 
-// const ModalContent = ({ account }) => {
-//     return (
-//         <button>{123}</button>
-//     )
-// }
-
 class Header extends Component {
-
-    state = {
-        isModalOpen: false
-    };
-
     onClick = () => {
         //Need to scroll to right place
         //but cant access Upper component DOM from this child component
         //===>lefting state up
     }
-
-    // openModal = () => {
-    //     this.setState({ isModalOpen: true });
-    // }
-
-    // onModalClose = () => {
-    //     this.setState({ isModalOpen: false });
-    // }
-
     render() {
         return (
             <Router>
@@ -62,9 +42,6 @@ class Header extends Component {
                         <Route path="/service" />
                         <Route path="/about" />
                         <Route path="/join-us" />
-                        {/* <Modal isHidden={!this.state.isModalOpen} onClose={this.onModalClose}>
-                            <ModalContent account={this.props.loginAccount} />
-                        </Modal> */}
                     </div>
                 </div>
             </Router>

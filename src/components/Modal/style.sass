@@ -1,18 +1,38 @@
 #modal-root
-  position: relative
-  z-index: 999
-
+    position: relative
+    z-index: 999
 
 .modal
-  background-color: rgba(0,0,0,0.5)
-  position: fixed
-  height: 100%
-  width: 100%
-  top: 0
-  left: 0
-  display: flex
-  align-items: center
-  justify-content: center
+    background-color: rgba(0, 0, 0, 0.5)
+    position: fixed
+    height: 100%
+    width: 100%
+    top: 0
+    left: 0
+    display: flex
+    align-items: center
+    justify-content: center
+
+    .modalbox
+      display: flex
+      align-items: center
+      justify-content: center
+      background: #f2f2f2
+      width: 400px
+      height: 400px
+      position: relative
+
+    .closeButton
+        color: #585858
+        line-height: 25px
+        position: absolute
+        top: 3px
+        right: 3px
+        text-align: center
+        width: 32px
+        height: 32px
+        text-decoration: none
+        font-weight: 700
 
 .hidden
     display: none
