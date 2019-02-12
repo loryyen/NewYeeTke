@@ -23,9 +23,26 @@ class LoginDialog extends Component {
         this.state = {
             account: "",
             password: "",
-            redirect: false
+            redirect: false,
+            prevAccount: ""
         }
     }
+
+    // static getDerivedStateFromProps(nextProps, prevState) {
+    //     if (prevState.prevAccount !== prevState.account) {
+    //         return {
+    //             prevAccount: prevState.account
+    //         }
+    //     } else {
+    //         return {
+    //             account: "",
+    //             password: "",
+    //             redirect: false,
+    //             prevAccount: ""
+    //         };
+    //     }
+    // }
+
 
     onAccountChange = (e) => {
         this.setState({
@@ -43,7 +60,7 @@ class LoginDialog extends Component {
         fakeLogin.auth(() => {
             this.setState({
                 redirect: true
-            })
+            }, this.props.onClose)
         });
         this.props.actions.add(this.state.account)
     }
@@ -52,9 +69,9 @@ class LoginDialog extends Component {
         return (
             <div className="logincontainer">
                 <label htmlFor="account">Account</label>
-                <input type="text" id="account" value={this.state.account} onChange={this.onAccountChange} />
+                <input type="text" id="account" onChange={this.onAccountChange} />
                 <label htmlFor="password">Password</label>
-                <input type="text" id="password" value={this.state.password} onChange={this.onPasswordChange} />
+                <input type="text" id="password" onChange={this.onPasswordChange} />
                 <button className="login-submit" onClick={this.onLoginClick}>Login</button>
                 {this.props.loginAccount}
             </div>

@@ -13,6 +13,9 @@ class Header extends Component {
         //but cant access Upper component DOM from this child component
         //===>lefting state up
     }
+    onLogoutClick = () => {
+        this.props.actions.add("");
+    }
     render() {
         return (
             <Router>
@@ -34,7 +37,8 @@ class Header extends Component {
                                     <Link to="/join-us" className="item" onClick={() => this.props.onHederNavClick("joinus")}>Join Us</Link >
                                 </li>
                                 <li>
-                                    <a onClick={this.props.openModal}>Login</a>
+                                    {this.props.loginAccount !== "" ? <a onClick={this.onLogoutClick}>Logout</a> : <a onClick={this.props.openModal}>Login</a>}
+                                    {/* <a onClick={this.props.openModal}>{this.props.loginAccount !== "" ? "Logout" : "Login"}</a> */}
                                 </li>
                             </ul>
                         </div>

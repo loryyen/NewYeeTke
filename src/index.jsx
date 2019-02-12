@@ -88,7 +88,7 @@ class App extends Component {
         <JoinUs ref={this.joinusRef} />
         <Modal isHidden={!this.state.isModalOpen} onClose={this.onModalClose}>
           {/* <ModalContent account={this.props.loginAccount} /> */}
-          <LoginDialog onClose={this.onModalClose}></LoginDialog>
+          <LoginDialog key={this.state.isModalOpen} onClose={this.onModalClose}></LoginDialog>
         </Modal>
         {/* <div>Intro</div>
                 <div>Service</div>
