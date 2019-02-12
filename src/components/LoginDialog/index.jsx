@@ -42,8 +42,6 @@ class LoginDialog extends Component {
     //         };
     //     }
     // }
-
-
     onAccountChange = (e) => {
         this.setState({
             account: e.target.value
