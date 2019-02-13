@@ -15,7 +15,7 @@ import LoginDialog from "components/LoginDialog";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 import Reducer from "./reducer";
-import Context from "./context/context";
+import UserContext from "./context/user-context";
 
 const store = createStore(
   Reducer,
@@ -80,24 +80,23 @@ class App extends Component {
 
   render() {
     return (
-      <Context.Provider value={state.loginAccount}>
-        <>
-          <Header
-            onHederNavClick={this.onHederNavClick}
-            openModal={this.openModal}
+      <>
+        <Header
+          onHederNavClick={this.onHederNavClick}
+          openModal={this.openModal}
+        />
+        <Intro ref={this.introRef} />
+        <About ref={this.aboutRef} />
+        <Service ref={this.serviceRef} />
+        <JoinUs ref={this.joinusRef} />
+        <Modal isHidden={!this.state.isModalOpen} onClose={this.onModalClose}>
+          {/* <ModalContent account={this.props.loginAccount} /> */}
+          <LoginDialog
+            key={this.state.isModalOpen}
+            onClose={this.onModalClose}
           />
-          <Intro ref={this.introRef} />
-          <About ref={this.aboutRef} />
-          <Service ref={this.serviceRef} />
-          <JoinUs ref={this.joinusRef} />
-          <Modal isHidden={!this.state.isModalOpen} onClose={this.onModalClose}>
-            {/* <ModalContent account={this.props.loginAccount} /> */}
-            <LoginDialog
-              key={this.state.isModalOpen}
-              onClose={this.onModalClose}
-            />
-          </Modal>
-          {/* <div>Intro</div>
+        </Modal>
+        {/* <div>Intro</div>
                 <div>Service</div>
                 <div>Philosophy</div>
                 <div>Business</div>
@@ -107,8 +106,7 @@ class App extends Component {
                 <div>Partner</div>
                 <div>Disclaimer</div>
                 <div>Footer</div> */}
-        </>
-      </Context.Provider>
+      </>
     );
   }
 }
