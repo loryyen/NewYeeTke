@@ -10,6 +10,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { add } from "actions";
 import { Consumer } from "context/user-context";
+
 class Header extends Component {
   onClick = () => {
     //Need to scroll to right place
@@ -64,17 +65,14 @@ class Header extends Component {
                     </Link>
                 </li>
                 <li>
-                  <Consumer>
-                    {value => (
-                      <span>{value}</span>
-                    )}
-                  </Consumer>
-                  {this.props.loginAccount !== "" ? (
+                  {/* {this.props.loginAccount !== "" ? (
                     <a onClick={this.onLogoutClick}>Logout</a>
                   ) : (
                       <a onClick={this.props.openModal}>Login</a>
-                    )}
+                    )} */}
                   {/* <a onClick={this.props.openModal}>{this.props.loginAccount !== "" ? "Logout" : "Login"}</a> */}
+
+                  <LogoutButton openModal={this.props.openModal}></LogoutButton>
                 </li>
               </ul>
             </div>
@@ -100,6 +98,18 @@ class Header extends Component {
 //         />
 //     );
 // }
+
+const LogoutButton = ({ openModal }) => {
+  return <div><Consumer>
+    {
+      value => (
+        <div>
+          {value.loginAccount !== "" ? (<a onClick={value.logoutEvent}>{`Welcome ${value.loginAccount}!`}&nbsp;Logout</a>) : (<a onClick={openModal}>Login</a>)}
+        </div>
+      )
+    }
+  </Consumer></div>
+};
 
 const mapStateToProps = (state, ownProps) => {
   return {

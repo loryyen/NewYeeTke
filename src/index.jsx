@@ -15,7 +15,7 @@ import LoginDialog from "components/LoginDialog";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 import Reducer from "./reducer";
-import UserContext from "./context/user-context";
+import { Provider as UserProvider } from "./context/user-context";
 
 const store = createStore(
   Reducer,
@@ -24,6 +24,19 @@ const store = createStore(
 
 const ModalContent = ({ account }) => {
   return <div>{"Welcome"}</div>;
+};
+
+
+const fakeLogin = {
+  isAuth: false,
+  auth(cb) {
+    this.isAuth = true;
+    setTimeout(cb, 1000);
+  },
+  logout(cb) {
+    this.isAuth = false;
+    setTimeout(cb, 1000);
+  }
 };
 
 // console.log(store.getState())
@@ -78,24 +91,45 @@ class App extends Component {
     }
   };
 
+  loginEvent = (account) => {
+    fakeLogin.auth(() => {
+      this.setState({
+        loginAccount: account
+      }, this.onModalClose);
+    });
+  }
+
+  logoutEvent = () => {
+    this.setState({
+      loginAccount: ""
+    });
+  }
+
   render() {
+    const onctextValue = {
+      loginAccount: this.state.loginAccount,
+      loginEvent: this.loginEvent,
+      logoutEvent: this.logoutEvent
+    }
     return (
       <>
-        <Header
-          onHederNavClick={this.onHederNavClick}
-          openModal={this.openModal}
-        />
-        <Intro ref={this.introRef} />
-        <About ref={this.aboutRef} />
-        <Service ref={this.serviceRef} />
-        <JoinUs ref={this.joinusRef} />
-        <Modal isHidden={!this.state.isModalOpen} onClose={this.onModalClose}>
-          {/* <ModalContent account={this.props.loginAccount} /> */}
-          <LoginDialog
-            key={this.state.isModalOpen}
-            onClose={this.onModalClose}
+        <UserProvider value={onctextValue}>
+          <Header
+            onHederNavClick={this.onHederNavClick}
+            openModal={this.openModal}
           />
-        </Modal>
+          <Intro ref={this.introRef} />
+          <About ref={this.aboutRef} />
+          <Service ref={this.serviceRef} />
+          <JoinUs ref={this.joinusRef} />
+          <Modal isHidden={!this.state.isModalOpen} onClose={this.onModalClose}>
+            {/* <ModalContent account={this.props.loginAccount} /> */}
+            <LoginDialog
+              key={this.state.isModalOpen}
+              onClose={this.onModalClose}
+            />
+          </Modal>
+        </UserProvider>
         {/* <div>Intro</div>
                 <div>Service</div>
                 <div>Philosophy</div>

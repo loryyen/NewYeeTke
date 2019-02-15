@@ -1,10 +1,14 @@
 import { createContext } from "react";
 
 
-const context = createContext(
-    ""//defaultValue
+export const { Provider, Consumer } = createContext(
+    {
+        loginAccount: "",
+        loginEvent: () => { },
+        logoutEvent: () => { }
+    }
 );
 
 //export default context;
-export const Provider = context.Provider;
-export const Consumer = context.Consumer;
+// export const Provider = context.Provider;
+// export const Consumer = context.Consumer;

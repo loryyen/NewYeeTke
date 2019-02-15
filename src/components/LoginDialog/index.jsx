@@ -3,7 +3,7 @@ import "./style.sass";
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
 import { add } from 'actions';
-import { Provider } from "context/user-context";
+import { Consumer } from "context/user-context";
 
 const fakeLogin = {
     isAuth: false,
@@ -55,6 +55,7 @@ class LoginDialog extends Component {
     }
 
     onLoginClick = () => {
+        console.log(this.state.account);
         fakeLogin.auth(() => {
             this.setState({
                 redirect: true
@@ -65,19 +66,34 @@ class LoginDialog extends Component {
 
     render() {
         return (
-            <Provider value={this.state.account}>
-                <div className="logincontainer">
-                    <label htmlFor="account">Account</label>
-                    <input type="text" id="account" onChange={this.onAccountChange} />
-                    <label htmlFor="password">Password</label>
-                    <input type="text" id="password" onChange={this.onPasswordChange} />
-                    <button className="login-submit" onClick={this.onLoginClick}>Login</button>
-                    {this.props.loginAccount}
-                </div>
-            </Provider>
+
+            <div className="logincontainer">
+                <label htmlFor="account">Account</label>
+                <input type="text" id="account" onChange={this.onAccountChange} />
+                <label htmlFor="password">Password</label>
+                <input type="text" id="password" onChange={this.onPasswordChange} />
+                {/* <button className="login-submit" onClick={this.onLoginClick}>Login</button> */}
+                <LoginBtn account={this.state.account}></LoginBtn>
+            </div>
         );
     }
 }
+
+
+const LoginBtn = ({ account }) => {
+    return <div>
+        <Consumer>
+            {
+                value => (
+                    <button className="login-submit" onClick={() => value.loginEvent(account)}>
+                        Login
+                    </button>
+                )
+            }
+        </Consumer>
+    </div>
+};
+
 
 const mapStateToProps = (state, ownProps) => {
     return {
