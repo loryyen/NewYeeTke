@@ -105,6 +105,18 @@ class App extends Component {
     });
   }
 
+  onServiceLinkClick = () => {
+    let container = this.serviceRef.current.getContainer();
+    if (container) {
+      container.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+      });
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }
+
   render() {
     const onctextValue = {
       loginAccount: this.state.loginAccount,
@@ -118,7 +130,7 @@ class App extends Component {
             onHederNavClick={this.onHederNavClick}
             openModal={this.openModal}
           />
-          <Intro ref={this.introRef} />
+          <Intro ref={this.introRef} onArrowClick={this.onServiceLinkClick} />
           <About ref={this.aboutRef} />
           <Service ref={this.serviceRef} />
           <JoinUs ref={this.joinusRef} />
@@ -130,16 +142,6 @@ class App extends Component {
             />
           </Modal>
         </UserProvider>
-        {/* <div>Intro</div>
-                <div>Service</div>
-                <div>Philosophy</div>
-                <div>Business</div>
-                <div>AboutEnv</div>
-                <div>Team</div>
-                <div>JoinUs</div>
-                <div>Partner</div>
-                <div>Disclaimer</div>
-                <div>Footer</div> */}
       </>
     );
   }

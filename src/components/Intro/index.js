@@ -11,6 +11,7 @@ class Intro extends Component {
         <div className="intro-outter">
           <div className="head" />
         </div>
+        <div className="arrowdown" onClick={this.props.onArrowClick}></div>
       </div>
     );
   }

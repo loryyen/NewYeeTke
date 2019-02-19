@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 import "./style.sass";
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux';
-import { add } from 'actions';
 import { Consumer } from "context/user-context";
 
 const fakeLogin = {
@@ -94,17 +91,17 @@ const LoginBtn = ({ account }) => {
     </div>
 };
 
+export default LoginDialog;
+// const mapStateToProps = (state, ownProps) => {
+//     return {
+//         loginAccount: state.username
+//     };
+// }
 
-const mapStateToProps = (state, ownProps) => {
-    return {
-        loginAccount: state.username
-    };
-}
+// const mapDispatchToProps = (dispatch, ownProps) => {
+//     return {
+//         actions: bindActionCreators({ add }, dispatch)
+//     }
+// }
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-    return {
-        actions: bindActionCreators({ add }, dispatch)
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps, null)(LoginDialog);
+// export default connect(mapStateToProps, mapDispatchToProps, null)(LoginDialog);
