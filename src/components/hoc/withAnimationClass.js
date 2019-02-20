@@ -1,8 +1,8 @@
 import React from "react";
-// import { isElementInViewPort } from "utils";
+import { isElementInViewPort } from "utils";
 import { throttle } from "lodash";
 
-const withAnimationClass = function(WrapperComponent, offsetY = 0) {
+const withAnimationClass = function (WrapperComponent, offsetY = 0) {
   return class extends React.Component {
     state = {
       animation: false
@@ -19,12 +19,9 @@ const withAnimationClass = function(WrapperComponent, offsetY = 0) {
     }
 
     onWindowScroll = throttle(() => {
-      // if (
-      //   isElementInViewPort(this.container.current, offsetY) &&
-      //   !this.state.animation
-      // ) {
-      this.setState({ animation: true });
-      // }
+      if (isElementInViewPort(this.container.current, offsetY) && !this.state.animation) {
+        this.setState({ animation: true });
+      }
     }, 30);
 
     render() {
